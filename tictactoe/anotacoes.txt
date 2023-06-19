@@ -1,0 +1,35 @@
+Para o JS da calculadora, começamos criando algumas variáveis. Uma para capturar o elemento gameBoard span pelo selectorAll, podemos nomea-la com boardRegions e no final do código iremos capturar o id 'start' e adicionar um evento de click, e passar a funçao initializeGame como parametro
+
+depois, criar uma variável para criar um tabuleiro que ira aparecer no console do navegador, começando com um array vazio
+
+depois criar uma variavel para alternar os jogadores, começando com uma string vazia, pode ser nomeada como turnPlayer
+
+agora, criar a primeira função, podemos nomea-la de updateTitle e ela vai servir para mostrar no html o jogador da vez, dentro dessa funçao, criar uma variavel nomeada de playerInput, capturar o id mas ao invés de uma string, iremos passar como parâmetro a variavel turnPlayer
+
+depois, capturar o id 'turnPlayer' como string abaixo no document e o innerText sera playerInput.value
+
+a proxima funçao sera para inicializar o jogo, dentro desta função vamos capturar o vBoard, atribuir um array bidimensional que vai conter 3 arrays com 3 strings vazias, isso ira mostrar no console a situação real do jogo
+
+abaixo, turnPlayer vai receber 'player1'
+abaixo, capturar o elemento 'h2' no document e setar o innerHTML como: Vez de: <span id="turnPlayer"></span> e abaixo chamar a função updateTitle()
+
+abaixo, fazer um forEach no boardRegions, passar uma função com element como parametro, esse elemento vai remover a classe 'win' para limpar o tabuleiro, também vamos colocar uma string vazia no innerText, e depois adicionar um evento no elemento do tipo click, depois chamar a função handleBoardClick que ainda sera criada
+
+agora a funçao handleBoardClick sera criada, ela vai servir para quando o jogador clicar no tabuleiro e recebera um ev como parametro, dentro dessa funçao obter a região que foi clicada, para isso podemos criar uma variavel nomeada span e ela receberá um ev.currentTarget, depois criar uma variável nomeada region, passar um span, depois um dataset e depois um region
+
+depois, criar uma variavel para par de linhas e colunas e essa variavel recebera um region.split('.'), essa funçao ira dividir os elementos que tiverem um ponto e transformando um array
+
+agora que temos as nossas regioes divididas, podemos capturar a row, que é a rowColumnPair na posiçao 0 e depois podemos capturar a column, que é a mesma coisa na posição 1, depois fazer um if, verificar no turnPlayer se ele for o 'player1, pegar o span e inserir um innerText = 'X' e fazer o vBoard em [row][column] e fazer receber um 'X' também, no else fazer ao contrario
+apos isso, chamar um console.clear e um console.table, chamar a funçao disableRegion com o parametro span que será criada agora e chamar a função updateTitle(), depois criar uma variável chamando a função getWinRegions que ainda não foi criada
+
+a funçao disableRegion vai receber um elemento como parametro. esse elemento vai receber um cursor 'default' no estilo e depois remover o evento do tipo click com a função handleBoardClick
+
+a funçao getWinRegions terá que conter uma variavel nomeada winRegions contendo um array vazio, depois terá uma sequencia de if verificando se uma posição existe e com todas as combinações possíveis de acordo com os números do dataset que formam uma linha reta, e então devemos dar um push em winRegions com os valores de cada if combinado, depois da sequencia de if, devemos retornar a variavel winRegions
+
+agora que temos a funçao getWinRegions criada, iremos fazer uma verificaçao se o tamanho de winRegions for maior do que 0, iremos chamar uma função que deve ser nomeada como handleWin com winRegions como parametro, essa função irá ser criada e explicada a seguir
+
+ao criar a função handleWin, passar regions como parametro.
+fazer um forEach em regions, passar uma função de callback com region como parametro, abaixo capturar no documento o seletor `[data-region="${region}"]` e adicionar a classe 'win' que já foi configurada no css para pintar de verde quando um dos jogadores ganhar
+
+já fora da função do forEach, criar uma variavel nomeada playerName e capturar o valor da função turnPlayer como id
+abaixo, capturar o seletor 'h2' no documento e setar o innerHTML para receber `${playerName}`

@@ -1,0 +1,83 @@
+para fazer o html do projeto, iremos primeiro inserir um link rel preconnect com o site https://fonts.googleapis.com
+mais um link rel também preconnect, com o site https://fonts.gstatick.com com crossorigin como parametro
+
+agora, importar uma fonte do googlefonts chamada Ubuntu
+
+agora, dentro do body, começar com um main, o data-theme padrão será 'dark'
+
+dentro do main, inserir um header com as classes 'flex align-center justify-between
+
+dentro do header, colocar o h1 'calc.js' e abaixo um button com id 'themeSwitcher, o valor será 'switch theme dark/light, fechar o header apos isso
+
+agora, dentro do main novamente, inserir um input do tipo text com o id 'input'
+
+criar uma div com o id 'keys', dentro dessa div inserir todos os botões com o valor e o data-value iguais, mas o primeiro e o ultimo botão não terão a classe charKey e sim um id pra cada, o do primeiro sera 'clear' e o valor será C, o último terá um id 'equal' e o valor será '=', fechar a div keys agora
+
+dentro do main novamente, inserir uma section com as classes 'flex align-center justify-between, dentro dessa section inserir um botao com o id 'copyToClipboard', o valor sera copy
+abaixo inserir um input de texto, id será 'result' e deve estar desabilitado
+fechar a section, o main e o documento html
+
+para o css, iremos começar com o seletor universal colocando border-box, margin 0 e padding 0
+
+inserir as variaveis dentro de um root, uma para o bg (#212529), border(#666), font(#f1f5f9), primary(#4dff91), error(#ff0043)
+
+no body, o bg color recebe a variavel bg-color, a fonte recebe font-color e a fonte será "ubuntu" sans serif
+
+no main o display deve ser block, margin 0 auto, max-width 40rem, padding 0 1.5rem 2.5rem a position deve ser relative
+
+o header deve ter um padding 2rem 0
+
+#themeSwitcher recebe bg-color, borda .125rem solid e a cor deve ser font-color. quando for :hover, background-color deve receber a cor da fonte, e a fonte recebe a cor do bg
+
+button bg color  - primary-color, sem borda, radius .25em, tam. fonte 700, padding .5rem 1rem e transition .15s
+
+input -> bg color, border 2px border-color, radius .5em, font color, display block, font 1.75rem, margin 0 auto, padding 1rem, textalign end, width 100%
+
+#keys recebe display grid, templatecolumns 1fr 4x, gap 1rem, margin 2rem 0
+
+#keys button bg color, cursor pointer, font 1.5rem, padding 1rem, quando for hover, filter brightness (0.8)
+
+#result -> borderwidth 2px 3x 0, border radius 0 .5rem .5rem 0
+
+#copyToClipBoard recebe bg transparente, border solid->bgcolor, border width 2px, borderradius .5rem 0 0 .5rem, font-color, cursor pointer, display block, height 4.25rem, width 6rem
+
+.flex recebe display flex
+
+.align-center recebe center
+
+justify-between recebe spacebetween
+
+error bg color - error-color
+
+.success border-color primary !important, color primary !important
+
+para o javascript: primeiro, capturar os dois seletores 'main' e ':root' dentro de duas variáveis com o mesmo nome
+depois, capturar os id's 'input' e 'result' dentro de variáveis com o mesmo nome, para ser objetivo
+
+depois, criar uma variável array com os seguintes valores:
+(, ), /, *, -, +, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, ., &, ""
+o nome da variavel acima deve ser allowedKeys, que basicamente significa as teclas que serão permitidas no programa
+
+depois, capturar todos os seletores na classe ".charKey", fazer um .forEach com uma função 'charKeyBtn como parâmetro.
+dentro dessa função, vamos adicionar um evento no charKeyBtn do tipo 'click', com uma função anonima contendo um bloco que vai ter uma variavel value que vai receber o valor do dataset do charKeyBtn, depois o input.value vai receber/concatenar um value.
+
+depois, vamos capturar o botão com id 'clear', vamos adicionar um evento do tipo 'click' com uma função com um bloco, zerando o input.value e um input.focus() vazio abaixo
+
+depois, adicionar um evento do tipo 'keydown' no input, com uma função com ev como parâmetro, inserir um preventDefault, fazer um if contendo um allowedKeys.includes (para verificar se o caractere digitado no teclado corresponde com os valores permitidos), o parâmetro do includes será (ev.key), fazer o input.value receber ev.key e retornar.
+
+abrir mais um if, este deve verificar se a tecla pressionada é um backspace, se for verdadeiro o input.value recebe input.value.slice(0, -1) -> esse código pegará do valor inicial até o penúltimo, removendo o último digitado
+
+logo após, abrir mais um if, este deve verificar se a tecla pressionada é enter, se for verdadeiro, deve receber apenas um calculate()
+
+depois, capturar o id 'equal' e adicionar um evento do tipo 'click', e chamar a função calculate que deve ser criada
+
+função calculate(): -> valor do resultInput = 'ERROR'
+adicionar classe no resultInput como 'error'
+criar uma variável result, colocando a perigosa função eval() com input.value como parâmetro.
+resultInput recebe result como valor e depois remover a classe 'error' ao contrario da forma em que foi criada
+
+capturar o id 'copyToClipBoard, adicionar um evento 'click', adicionar uma funçao com ev de parametro, criar uma variavel para button e adicionar um currentTarget e após isso, fazer um if, se o innerText do button for igual a copy ele recebe a string 'copied', então deve ser adicionada uma classe 'success', apos isso, navigator.clipboard.writeText(resultInput.value), no else o innerText será 'copy', e depois remover a classe 'success'
+
+agora, capturar o id 'themeSwitcher', adicionar um evento 'click' com uma funçao anonima, dentro da funçao deve conter um if que ira verificar se o tema do dataset do principal é 'dark', dentro do if adicionar um root.style.serProperty, as cores agora serão trocadas dentro dessas propriedades. o bg-color é #f1f5f9, border-color é #aaa, font-color é #212529, primary-color é #26834a, então o dataset do tema do main deve conter a string 'light'
+
+no else, as cores devem ficar ao contrário, então bg-color recebe #212529, border-color recebe #666, font-color recebe #f1f5f9, primary-color recebe #4dff91 e o dataset deve ser mudado para 'dark'
